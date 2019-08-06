@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Word Count Home</title>
+        <style>
+            .text_style{
+                text-align: center;
+            }
+            .back_ground1{
+                background-color:tan;
+            }
+            .back_ground2{
+                background-color:lightgray;
+            }
+        </style>
+    </head>
+    <body class="back_ground1 text_style">
+        <h1>WORD COUNT</h1>
+
+        <a href="{% url 'about' %}">ABOUT</a>
+        <br><br>
+
+        <form action="{% url 'result'%}">
+            <textarea class="back_ground2" cols="100" rows="25" name="fulltext"></textarea>
+            <br>
+            <input type="submit" value="Count!" />
+        </form>
+    </body>
+</html>

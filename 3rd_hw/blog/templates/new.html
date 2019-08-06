@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+<li class="nav-item active">
+    <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'notice' %}">Notice</a>
+</li>
+{% endblock %}
+
+{% block jumbotron %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Welcome to ningpop's blog!</h1>
+        <p class="lead">This is ningpop's blog. Come on if you talk with me.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="{% url 'create' %}">
+        <h4>제목: </h4>
+        <input type="text" name="title">
+        <br>
+        <br>
+        <h4>본문: </h4>
+        <textarea cols=90 rows=16 name="body"></textarea>
+        <br>
+        <br>
+        <input class="btn btn-dark" type="submit" value="제출하기">
+    </form>
+</div>
+<br>
+{% endblock %}

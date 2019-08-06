@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block style %}
+<style>
+    .form-signin{
+        width: 100%;
+        max-width: 350px;
+        padding: 15px;
+        margin: auto;
+    }
+</style>
+{% endblock %}
+
+{% block navbar %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'home' %}">Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'findmyteacher' %}">Find my teacher</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'beateacher' %}">Be a teacher</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'aboutus' %}">About Us</a>
+</li>
+{% endblock %}
+
+<form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
+</form>
+<a class="btn btn-outline-secondary" href="signup.html" role="button">Sign Up</a>
+
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br>
+<br>
+{% endif %}
+
+<form class="form-signin text-center" method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <img class="mb-4" src="{% static 'icon/student-hat.png' %}" alt="student-hat" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+
+    <div class="mb-2">
+        <label for="username" class="sr-only">Username</label>
+        <input name="username" id="username" class="form-control" placeholder="Username" autofocus="">
+    </div>
+    <div class="mb-2">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password">
+    </div>
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+</form>
+{% endblock %}

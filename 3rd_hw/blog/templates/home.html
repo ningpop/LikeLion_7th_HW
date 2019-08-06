@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+<li class="nav-item active">
+    <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'notice' %}">Notice</a>
+</li>
+{% endblock %}
+
+{% block jumbotron %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Welcome to ningpop's blog!</h1>
+        <p class="lead">This is ningpop's blog. Come on if you talk with me.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% for blog in posts %}
+    <div class="container">
+        <h2><a href="{% url 'detail' blog.id %}">{{ blog.title }}</a></h2>
+        <p>{{ blog.pub_date }}</p>
+    </div>
+{% endfor %}
+
+<div class="container">
+    {% if posts.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{posts.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    <span>{{posts.number}}</span>
+    <span>of</span>
+    <span>{{posts.paginator.num_pages}}</span>
+
+    {% if posts.has_next %}
+    <a href="?page={{posts.next_page_number}}">Next</a>
+    <a href="?page={{posts.paginator.num_pages}}">Last</a>
+    {% endif %}
+</div>
+<br>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block navbar %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'home' %}">Home</a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="{% url 'notice' %}">Notice <span class="sr-only">(current)</span></a>
+</li>
+{% endblock %}
+
+{% block jumbotron %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Notice!</h1>
+        <p class="lead">README :)</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <img src="{% static 'selfie.jpg' %}" alt="" width="150" height="200">
+    <h2>Hello, I'm ningpop and 24.</h2>
+    <p>I'm live in Suwon, major is Computer Software Engineering.</p>
+</div>
+{% endblock %}

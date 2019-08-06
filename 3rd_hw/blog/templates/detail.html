@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+<li class="nav-item active">
+    <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'notice' %}">Notice</a>
+</li>
+{% endblock %}
+
+{% block jumbotron %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Welcome to ningpop's blog!</h1>
+        <p class="lead">This is ningpop's blog. Come on if you talk with me.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ blog.title }}</h2>
+    <p>{{ blog.pub_date }}</p>
+    <p>{{ blog.body }}</p>
+    <a href="{% url 'home' %}">돌아가기</a>
+</div>
+<br>
+{% endblock %}
