@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ho">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>0801 Project</title>
+</head>
+<body>
+    <div>
+        {% if user.is_authenticated %}
+        <p>환영합니다. {{ user.profile.user }}님! </p>
+        <a href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+        <form id="logout" method="POST" action="{% url 'logout' %}">
+            {% csrf_token %} <input type="hidden" />
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+    </div>
+</body>
+</html>

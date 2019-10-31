@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>signup</title>
+
+    <script>
+        function signupCheck(){
+            var id = document.getElementById('id').value;
+            var pwd1 = document.getElementById('password1').value;
+            var pwd2 = document.getElementById('password2').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phoneNumber').value;
+            var gender = document.getElementsByName('gender');
+
+            var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+            var reg2 = /(010)[-](\d{3}|\d{4})[-](\d{4}$)/g;
+
+            if(id == ''){
+                alert('ID를 입력하세요.')
+                document.getElementById('id').focus();
+                return false;
+            }
+            else if(pwd1 == '' || pwd2 == ''){
+                alert('비밀번호를 입력하세요.')
+                document.getElementById('pwd1').focus();
+                return false;
+            }
+            else if(pwd1 != pwd2){
+                alert('비밀번호가 다릅니다. 다시 확인해주세요.');
+                document.getElementById('pwd1').value = '';
+                document.getElementById('pwd2').value = '';
+                document.getElementById('pwd1').focus();
+                return false;
+            }
+            else if(email == ''){
+                alert('email을 입력하세요.')
+                document.getElementById('email').focus();
+                return false;
+            }
+            else if(!reg.test(email)){
+                alert('올바른 email 형식이 아닙니다.');
+                document.getElementById('email').value = '';
+                document.getElementById('email').focus();
+                return false;
+            }
+            else if(phone == ''){
+                alert('휴대폰 번호를 입력하세요.')
+                document.getElementById('phone').focus();
+                return false;
+            }
+            else if(!reg2s.test(phone)){
+                alert('올바른 휴대폰번호 형식이 아닙니다. 하이픈(-)을 넣어서 작성해주세요.');
+                document.getElementById('phone').value = '';
+                document.getElementById('phone').focus();
+                return false;
+            }
+            else if(gender[0].checked == false && gender[1].checked == false){
+                alert('성별을 선택하세요.');
+                return false;
+            }
+            else{
+                var formValid = false;
+        
+                var i = 0;
+                while (!formValid && i < gender.length) {
+                    if (gender[i].checked) formValid = true;
+                    i++;
+                }
+                
+                if (!formValid){
+                    alert("Must check some genderic option!");
+                    return formValid;
+                }
+                document.getElementById("form1").method = "POST";
+                document.getElementById("form1").action = "{% url 'signup' %}";
+                alert("가입이 완료되었습니다.");
+                return true;
+            }
+        }
+    </script>
+</head>
+<body>
+    {% if error %}
+    {{ error }}
+    <br>
+    <br>
+    {% endif %}
+    
+    <h1>Sign Up!</h1>
+
+    <form id="form1" method="" action="">
+        {% csrf_token %}
+        UserID:<br>
+        <input id="id" name="id" type="text" value=""><br>
+        Password:<br>
+        <input id="password1" name="password1", type="password" value=""><br>
+        Confirm Password:<br>
+        <input id="password2" name="password2", type="password" value=""><br>
+        Email:<br>
+        <input id="email" name="email" type="text" style="width: 170px"> ex)abc123@likelion.org<br>
+        PhoneNumber:<br>
+        <input id="phoneNumber" name="phoneNumber" type="text" value="" maxlength="13"> ex) 010-0000-0000<br>
+        Gender:<br>
+        <label for="s1">female</label>
+        <input type="radio" name="gender" value="female" /><br>
+        <label for="s2">male</label>
+        <input type="radio" name="gender" value="male" /><br>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Sign Up!" onclick="signupCheck()">
+    </form>
+</body>
+</html>
